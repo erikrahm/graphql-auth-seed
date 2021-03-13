@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { ApolloServer, gql, AuthenticationError } from "apollo-server-express";
 
-import { DataSource } from "./datasource";
 import { typeDefs } from "./graphql-schema";
 import { resolvers } from "./resolvers";
 import { Models } from "./models";
@@ -50,9 +49,6 @@ const server = new ApolloServer({
     ${typeDefs}
   `,
   resolvers,
-  dataSources: () => ({
-    externalAPI: new DataSource(),
-  }),
   context: async ({ req }: { req: AuthRequest }) => {
     if (req) {
       return {
